@@ -1,0 +1,51 @@
+export const Questions = [
+    {
+      prompt: "What is my name?",
+      optionA: "John",
+      optionB: "Jake",
+      optionC: "Josh",
+      optionD: "Pedro",
+      asnwer: "D",
+    },
+    {
+      prompt: "Which of this is not a programming language?",
+      optionA: "Python",
+      optionB: "JavaScript",
+      optionC: "MC-03",
+      optionD: "Java",
+      asnwer: "C",
+    },
+    {
+      prompt: "Which of this is not a javascript framework?",
+      optionA: "React",
+      optionB: "Angular",
+      optionC: "Vue",
+      optionD: "Java",
+      asnwer: "D",
+    },
+    {
+        prompt: "Which of this is not a PHP framework?",
+        optionA: "Symphony",
+        optionB: "PHP Cake",
+        optionC: "Vue",
+        optionD: "Laravel",
+        asnwer: "C",
+      },
+
+      {
+        prompt: "3. How do you represent data in JSON?",
+        optionA: "Metadata",
+        optionB: "Binary Data",
+        optionC: "Key-Value pairs ",
+        optionD: "Key-Object pairs",
+        asnwer: "C",
+      },
+      {
+        prompt: "What is the file extension commonly used for JSON files?",
+        optionA: "json",
+        optionB: "js",
+        optionC: "xml",
+        optionD: "txt",
+        asnwer: "A",
+      },
+  ];
