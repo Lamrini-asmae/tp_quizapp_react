@@ -1,39 +1,59 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { Questions } from '../helpers/Questions'
 import { QuizContext } from '../helpers/Context';
 import Button from './Button';
 
 const Quiz = () => {
   const {score, setScore, setGameState}=useContext(QuizContext);
+  const [index,setIndex]=useState(0);
+  const [lock,setlock]=useState(false);
+  let Option1=useRef(null);
+  let Option2=useRef(null);
+  let Option3=useRef(null);
+  let Option4=useRef(null);
+  let query_options=[Option1,Option2,Option3,Option4];
 
-  const [currentQuestion,setCurrentQuestion]=useState(0);
-  const [option,setOption]=useState("");
-  const [btnActive,setBtnActive]=useState(0);
-
+  const checkAnswer=(e,option)=>{
+    if(lock==false){
+      if( Questions[index].asnwer==option){
+        e.target.classList.add("correct"); 
+        setlock(true);
+        setScore(score+1);
+      }
+      else {
+        e.target.classList.add("wrong"); 
+        setlock(true);
+        query_options[Questions[index].asnwer-1].current.classList.add("correct");
+      } 
+    }
+  }
   const handleNextQuestion=()=>{
-    setCurrentQuestion(currentQuestion+1);
-    Questions[currentQuestion].asnwer==option && setScore(score+1); 
-    setBtnActive(0);
+    if(lock){
+      setIndex(index+1);
+      setlock(false);
+      query_options.map((item)=>{
+        item.current.classList.remove("correct","wrong");
+        return null;
+      });
+    }
   }
   const FinishQuestion=()=>{
-    Questions[currentQuestion].asnwer==option && setScore(score+1); 
-    setGameState("end");
-    console.log(btnActive);
+    lock==true && setGameState("end");
   }
 
   return (
     <div className="quiz-container">
-      <h1>Question:{Questions[currentQuestion].prompt}</h1>
+      <h1>{index+1} :{Questions[index].prompt}</h1>
       <div className='options'>
-        <button onClick={()=>{setOption("A"); (setBtnActive(1)) }} className={btnActive==1 ? "Btn-active": ""}>{Questions[currentQuestion].optionA}</button>
-        <button onClick={()=>{setOption("B"); (setBtnActive(2)) }} className={btnActive==2 ? "Btn-active": ""}>{Questions[currentQuestion].optionB}</button>
-        <button onClick={()=>{setOption("C"); (setBtnActive(3)) }} className={btnActive==3 ? "Btn-active": ""}>{Questions[currentQuestion].optionC}</button>
-        <button onClick={()=>{setOption("D"); (setBtnActive(4)) }}  className={btnActive==4 ? "Btn-active": ""}>{Questions[currentQuestion].optionD}</button>
+        <button ref={Option1} onClick={(e)=>{checkAnswer(e,1)}}> {Questions[index].option1}</button>
+        <button ref={Option2} onClick={(e)=>{checkAnswer(e,2)}}>{Questions[index].option2}</button>
+        <button ref={Option3} onClick={(e)=>{checkAnswer(e,3)}}>{Questions[index].option3}</button>
+        <button ref={Option4} onClick={(e)=>{checkAnswer(e,4)}}>{Questions[index].option4}</button>
       </div>
-    {currentQuestion==Questions.length-1 ? 
-      <Button label="Finish Quiz" onClick={FinishQuestion}></Button>:
-      <Button label="Next Question" onClick={handleNextQuestion}></Button>
-    }
+      {index==Questions.length-1 ? 
+        <Button label="Finish Quiz" onClick={FinishQuestion}></Button>:
+        <Button label="Next Question" onClick={handleNextQuestion}></Button>
+      }
     </div>
   );
 }

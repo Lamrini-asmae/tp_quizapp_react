@@ -1,3 +1,6 @@
+body{
+  background-color: #90e0ef;
+}
 .App {
   font-family:  Arial, Helvetica, sans-serif;
   display: flex;
@@ -9,7 +12,7 @@
   width: 500px;
   height: 500px;
   border-radius: 10px;
-  background-color: lightblue;
+  background-color: #03045e;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,8 +28,7 @@
   border: none;
   border-radius: 5px;
   font-size: 20px;
-  color: white;
-  background-color: rgb(15, 80, 102);
+  background-color:#caf0f8;
 }
 .options{
   width: 100%;
@@ -44,10 +46,12 @@
   border-radius: 5px;
   font-size: 20px;
 }
-.Btn-active{
-  background-color: #0aa5c4;
-  border: rgb(15, 80, 102);
+.correct{
+  background-color: #80ed99;
 }
+.wrong{
+  background-color: #ff8b8b;
 
+}
 
 
